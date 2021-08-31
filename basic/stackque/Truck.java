@@ -9,7 +9,7 @@ import java.util.Queue;
 
 public class Truck {
 	
-	class T {
+	static class T {
         int weight;
         int move;
 
@@ -48,7 +48,7 @@ public class Truck {
                 t.moving();
             }
 
-            if (moveQ.peek().move > bridgeLength) {
+            if (moveQ.peek().move > bridge_length) {
                 T t = moveQ.poll();
                 curWeight -= t.weight;
             }
