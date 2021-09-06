@@ -1,14 +1,14 @@
 
 public class WhitePaper {
 
-	public static int solution(int solution) {
+	public int solution(int solution) {
 		int answer = 0;
 		
 		return answer;
     }
 
 	public static void main(String[] args) {
-		
-		System.out.println(solution(0));	
+		WhitePaper a = new WhitePaper();
+		System.out.println(a.solution(0));	
 	}
 }
