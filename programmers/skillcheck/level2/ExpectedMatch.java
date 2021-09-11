@@ -1,8 +1,5 @@
 package skillcheck.level2;
 
-import java.util.LinkedList;
-import java.util.Queue;
-
 // 예상 대진표
 // 한 과정씩 구현하는 것이 절대 아닐 것이라고 생각했지만, 생각이 안나서 결국 구현해서 다 통과했는데 너무 오래걸렸다.
 // XOR을 사용한 천재가있고 그냥 속해있는 스테이지 별로 계산해서, a b대신에 스테이지를 넣어주고 만나게 할 수도 있는데

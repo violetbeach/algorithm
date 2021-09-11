@@ -26,10 +26,6 @@ public class NNumberGame {
 
 	public static void main(String[] args) {
 		NNumberGame a = new NNumberGame();
-		int n = 16;
-		int t = 16;
-		int m = 2;
-		int p =1;
 		System.out.println(a.solution(16, 0, 2, 1));	
 	}
 
