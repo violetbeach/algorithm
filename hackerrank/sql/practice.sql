@@ -43,3 +43,22 @@ select distinct city from station where city regexp '^[^aeiou]';
 
 15. Weather Observation Station 10
 select distinct city from station where city regexp '[^aeiou]$';
+
+16. Weather Observation Station 11
+select distinct city from station where city regexp '^[^aeiou]|[^aeiou]$'
+
+17. Weather Observation Station 12
+select distinct city from station where city regexp '^[^aeiou].*[^aeiou]$'
+
+18. Higher Than 75 Marks
+select name from students where marks>75 order by right(name, 3), id;
+-- select name from students where marks>75 order by substring(name, length(name)-2, 3), id;
+
+19. Employee Names
+select name from employee order by name;
+
+20. Employee Salaries
+select name from employee where salary > 2000 and months < 10;
+
+
+
