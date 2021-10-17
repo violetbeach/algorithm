@@ -29,6 +29,7 @@ SELECT count(1) - count(distinct CITY) from station;
 (select CITY, length(CITY) from STATION order by length(CITY), CITY limit 1)
 UNION
 (select CITY, length(CITY) from STATION order by length(CITY) DESC, CITY limit 1);
+
 11. Weather Observation Station 6 -- 1. substring, 2. regexp, 3. LIKE OR
 select distinct city from station where city regexp '^[aeiou]';
 
@@ -60,5 +61,19 @@ select name from employee order by name;
 20. Employee Salaries
 select name from employee where salary > 2000 and months < 10;
 
+21. Top Earners
+select max(salary*months), count(1) from employee group by salary * months order by salary * months desc limit 1;
+
+22. Weather Observation Station 2
+select round(sum(lat_n), 2), round(sum(long_w), 2) from station;
+
+23. Weather Observation Station 13
+select truncate(sum(lat_n), 4) from station where lat_n between 38.7880 and 137.2345;
+
+24. Weather Observation Station 14
+select truncate(max(lat_n), 4) from station where lat_n < 137.2345;
+
+25. Weather Observation Station 15
+select round(long_w, 4) from station where lat_n < 137.2345 order by lat_n desc limit 1;
 
 
