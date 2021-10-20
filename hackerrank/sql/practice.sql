@@ -77,3 +77,6 @@ select truncate(max(lat_n), 4) from station where lat_n < 137.2345;
 select round(long_w, 4) from station where lat_n < 137.2345 order by lat_n desc limit 1;
 
 
+26. Weather Observation Station 16
+select round(min(lat_n), 4) from station where lat_n > 38.7780;
+
