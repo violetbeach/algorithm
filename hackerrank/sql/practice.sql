@@ -80,3 +80,13 @@ select round(long_w, 4) from station where lat_n < 137.2345 order by lat_n desc 
 26. Weather Observation Station 16
 select round(min(lat_n), 4) from station where lat_n > 38.7780;
 
+27. Type of Triangle
+select 
+case
+    when A = B and B = C then 'Equilateral'
+    when A >= B+C or C >= A+B or B >= A+C then 'Not A Triangle'
+    when A = B or A = C OR B = C then 'Isosceles'
+    else 'Scalene'
+end
+from triangles;
+
