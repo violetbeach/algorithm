@@ -90,3 +90,10 @@ case
 end
 from triangles;
 
+28. The PADS -- UNION이나 서브쿼리를 쓰면 정렬이 풀린다. 한번 더 묶고 정렬하거나, 따로 출력해야 한다.
+select concat(name, "(", left(occupation, 1), ")") from occupations order by name;
+select concat("There are a total of ", count(1), " ", lower(occupation), "s.")
+from occupations
+group by occupation
+order by count(1), occupation;
+
