@@ -97,3 +97,14 @@ from occupations
 group by occupation
 order by count(1), occupation;
 
+29. Occupations -- 어려움. row_number를 파티셔닝해서 groupnumber로 지정 했음. min/max를 사용한 이유는 group by 때문임. 저렇게 해야 null이나옴.
+select  
+    max(case occupation when 'Doctor' then name end),
+    max(case occupation when 'Professor' then name end),
+    max(case occupation when 'Singer' then name end),
+    max(case occupation when 'Actor' then name end)
+from (
+  select *, row_number() over (partition by occupation order by name) rn
+  from occupations
+) t
+group by rn
