@@ -76,7 +76,6 @@ select truncate(max(lat_n), 4) from station where lat_n < 137.2345;
 25. Weather Observation Station 15
 select round(long_w, 4) from station where lat_n < 137.2345 order by lat_n desc limit 1;
 
-
 26. Weather Observation Station 16
 select round(min(lat_n), 4) from station where lat_n > 38.7780;
 
@@ -108,3 +107,13 @@ from (
   from occupations
 ) t
 group by rn
+
+30. Binary Tree Nodes -- case의 when절에서도 쿼리를 호출해서 비교할 수 있다.
+select N,
+    case
+        when P is null then 'Root'
+        when N in (select distinct P from BST) then 'Inner'
+        else 'Leaf'
+    end
+from BST
+order by N;
