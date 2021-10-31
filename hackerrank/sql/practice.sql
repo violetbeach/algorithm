@@ -117,3 +117,13 @@ select N,
     end
 from BST
 order by N;
+
+31. Revising Aggregations - The Count Function
+select count(id) from city where population > 100000;
+
+32. Revising Aggregations - The Sum Function
+select sum(population) from city where district = 'California';
+
+33. Revising Aggregations - Averages
+select avg(population) from city where district = 'California';
+
