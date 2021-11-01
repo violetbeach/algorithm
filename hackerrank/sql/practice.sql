@@ -127,3 +127,17 @@ select sum(population) from city where district = 'California';
 33. Revising Aggregations - Averages
 select avg(population) from city where district = 'California';
 
+34. Average Population
+select round(avg(population)) from city;
+
+35. Japan Population
+select sum(population) from city where countrycode = 'JPN';
+
+36. Population Density Difference
+select max(population) - min(population) from city;
+
+37. Weather Observation Station 18
+select round(abs(max(lat_n)-min(lat_n)) + abs(max(long_w)-min(long_w)), 4) from station;
+
+38. Weather Observation Station 19
+select round(sqrt(pow(max(lat_n)-min(lat_n),2) + pow(max(long_w)-min(long_w),2)),4) from station;
