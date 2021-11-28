@@ -1,11 +1,6 @@
-package basic.hash;
+package programmers.basic.hash;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 // 베스트앨범
 // 리스트를 배열에 옮길 때 stream().mapToInt(i->i).toArray(); 이거보다 for문이 훨~~~씬 빠르다.
@@ -59,8 +54,10 @@ public class BestAlbum {
         List<String> list = new ArrayList<>();
         list.addAll(map.keySet());
 
-        Collections.sort(list,new Comparator<>() {
-            public int compare(String key1, String key2) {
+        Collections.sort(list,new Comparator<Object>() {
+
+			@Override
+            public int compare(Object key1, Object key2) {
                 if ( map.get(key1) > map.get(key2) ) return -1;
                 else if ( map.get(key1) == map.get(key2) ) return 0;
                 else return 1;
