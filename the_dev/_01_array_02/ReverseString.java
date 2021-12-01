@@ -1,4 +1,4 @@
-package me.whiteship.interview._01_array_02;
+package the_dev._01_array_02;
 
 public class ReverseString {
 
@@ -15,8 +15,14 @@ public class ReverseString {
      * @param message
      * @return
      */
+
+    // 풀이 느낀점 -> 굳이 StringBuilder를 이유가 없음 + 그냥 temp 이용해서 자리 바꿔주면, 공간복잡도 O(1)이 될 수 있었음. (그게 더 좋은 지는 모르겠음)
     private char[] solution1(char[] message) {
-        return null;
+        StringBuilder sb = new StringBuilder();
+        for(char c : message) {
+            sb.insert(0, c);
+        }
+        return sb.toString().toCharArray();
     }
 
     /**
