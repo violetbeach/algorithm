@@ -1,6 +1,7 @@
-package me.whiteship.interview._01_array_03;
+package the_dev._01_array_03;
 
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class TwoSum {
 
@@ -19,7 +20,16 @@ public class TwoSum {
      * @param target
      * @return
      */
+
+    // 내가 더 잘 풀은듯..! 굳이 다 Map에 넣고 로직을 풀어낼 이유가 없어서 조금 자원을 이득을 봤다.
     private int[] solution(int[] numbers, int target) {
+        HashMap<Integer, Integer> hm = new HashMap<>();
+        for (int i = 0; i < numbers.length; i++) {
+            if(hm.containsKey(target - numbers[i])) {
+                return new int[] {hm.get(target - numbers[i]), i};
+            }
+            hm.put(numbers[i], i);
+        }
         return null;
     }
 
