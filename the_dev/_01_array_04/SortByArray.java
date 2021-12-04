@@ -1,4 +1,4 @@
-package me.whiteship.interview._01_array_04;
+package the_dev._01_array_04;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -21,6 +21,19 @@ public class SortByArray {
      * @return
      */
     private int[] solution(int[] numbers) {
+        boolean[] booleans = new boolean[100];
+
+        for(int num : numbers) {
+            booleans[num] = true;
+        }
+
+        int index = 0;
+        for (int i = 0; i < booleans.length; i++) {
+            if(booleans[i]) {
+                numbers[index++] = i;
+            }
+        }
+
         return numbers;
     }
 
