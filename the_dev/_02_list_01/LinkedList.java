@@ -1,4 +1,4 @@
-package me.whiteship.interview._02_list_01;
+package the_dev._02_list_01;
 
 public class LinkedList {
 
@@ -10,6 +10,8 @@ public class LinkedList {
         list.add(new LinkedNode(1));
         list.add(new LinkedNode(2));
         list.add(new LinkedNode(3));
+        list.add(new LinkedNode(4));
+        list.add(new LinkedNode(5));
 
         list.print();
         list.reverse();
@@ -41,7 +43,39 @@ public class LinkedList {
      * @return
      */
     private void reverse() {
+        LinkedNode current = this.head;
+        LinkedNode prev = null;
+        LinkedNode next = null;
 
+        while (current != null) {
+            next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+        }
+
+        this.tail = this.head;
+        this.head = prev;
     }
+
+    private void reverse2() {
+        LinkedNode head = this.head;
+        this.head = reverseRecursive(head);
+        this.tail = head;
+    }
+
+    private LinkedNode reverseRecursive(LinkedNode node) {
+        if (node == null || node.next == null) {
+            return node;
+        }
+
+        LinkedNode newHead = reverseRecursive(node.next);
+        node.next.next = node;
+        node.next = null;
+
+        return newHead;
+    }
+    
+    // 난이도 보통이라는데 너무 어렵다.. 근데 재밌음!!
 
 }

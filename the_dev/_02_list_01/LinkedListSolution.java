@@ -1,4 +1,4 @@
-package me.whiteship.interview._02_list_01;
+package the_dev._02_list_01;
 
 public class LinkedListSolution {
 
@@ -10,9 +10,11 @@ public class LinkedListSolution {
         list.add(new LinkedNode(1));
         list.add(new LinkedNode(2));
         list.add(new LinkedNode(3));
+        list.add(new LinkedNode(4));
+        list.add(new LinkedNode(5));
 
         list.print();
-        list.reverse2();
+        list.reverse1();
 
         list.print();
     }
