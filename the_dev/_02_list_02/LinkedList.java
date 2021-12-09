@@ -1,4 +1,7 @@
-package me.whiteship.interview._02_list_02;
+package the_dev._02_list_02;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class LinkedList {
 
@@ -24,7 +27,16 @@ public class LinkedList {
      * @return
      */
     private LinkedNode findFromLast(int n) {
-        return null;
+        Map<Integer, LinkedNode> hm = new HashMap<>();
+        LinkedNode current = this.head;
+        int i = 0;
+        while(current != null) {
+            hm.put(i++, current);
+            current = current.next;
+        }
+
+        return hm.get(hm.size() - n);
+
     }
 
     private void print() {

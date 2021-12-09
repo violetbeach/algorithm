@@ -1,4 +1,4 @@
-package me.whiteship.interview._02_list_02;
+package the_dev._02_list_02;
 
 import java.util.HashMap;
 import java.util.Map;
