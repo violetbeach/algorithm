@@ -36,7 +36,23 @@ public class LinkedList {
         }
 
         return hm.get(hm.size() - n);
+    }
 
+
+    // 이런 방식까지 생각할 수 있어야 시니어인듯.. 계속 풀자
+    private LinkedNode findFromLast2(int n) {
+        LinkedNode left = this.head, right = this.head;
+        int count = 0;
+        while(right.next != null) {
+            if(count == n - 1) {
+                left = left.next;
+                right = right.next;
+            } else if (count++ < n) {
+                right = right.next;
+            }
+        }
+
+        return left;
     }
 
     private void print() {
