@@ -1,4 +1,4 @@
-package me.whiteship.interview._02_list_04;
+package the_dev._02_list_04;
 
 public class LinkedList {
 
@@ -26,10 +26,27 @@ public class LinkedList {
      *  예) 1 -> 2 -> 3        => false
      * @return
      */
+
+    // 대..박.. 신기하다.. 시간복잡도 O(n)인데, 공간복잡도도 O(1).. 훌륭한 알고리즘을 적용한 것 같다.
     private boolean hasCircle() {
+        LinkedNode slow = this.head;
+        LinkedNode fast = this.head;
+
+        while(fast != null) {
+            if (fast.next == null || fast.next.next == null) {
+                return false;
+            }
+
+            fast = fast.next.next;
+            if (slow == fast) {
+                return true;
+            }
+
+            slow = slow.next;
+        }
+
         return false;
     }
-
     private void print() {
         LinkedNode nodeToPrint = this.head;
         while(nodeToPrint != null) {

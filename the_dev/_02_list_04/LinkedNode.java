@@ -1,4 +1,4 @@
-package me.whiteship.interview._02_list_04;
+package the_dev._02_list_04;
 
 public class LinkedNode {
 
