@@ -1,4 +1,4 @@
-package me.whiteship.interview._03_stack_03;
+package the_dev.interview._03_stack_03;
 
 import java.util.Stack;
 
