@@ -15,7 +15,7 @@ public class Compression {
         List<Integer> answer = new ArrayList<>();
         
         HashMap<String, Integer> hm = new HashMap<>();
-        for(; dic<27; dic++) hm.put(Character.toString('A' + dic - 1), dic);
+        for(; dic<27; dic++) hm.put(Character.toString((char) ('A' + dic - 1)), dic);
         
         for(int i=0; i<len; i++){
             int count = i;
