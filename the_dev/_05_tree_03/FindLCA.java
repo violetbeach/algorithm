@@ -1,5 +1,8 @@
 package me.whiteship.interview._05_tree_03;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class FindLCA {
 
     private static class Node {
@@ -38,8 +41,45 @@ public class FindLCA {
     /**
      * TODO 주어진 이진 트리 (node) 에서 두 노드 n1, n2의 가장 가까운 공통 조상(Lowest Common Ancestor)을 찾는 코드를 작성하라.
      */
-    private Node solution(Node node, int n1, int n2) {
-        return null;
+    private Node solution(Node root, int n1, int n2) {
+        List<Node> n1path = new ArrayList<>();
+        List<Node> n2path = new ArrayList<>();
+        if(!findPath(root, n1, n1path) || !findPath(root, n2, n2path)) {
+            return null;
+        }
+
+        int index = 0;
+        for(; index < n1path.size() && index < n2path.size(); index++) {
+            if(!n1path.get(index).equals(n2path.get(index))) {
+                break;
+            }
+        }
+
+        return n1path.get(index - 1);
+    }
+
+    private boolean findPath(Node node, int number, List<Node> path) {
+        if(node == null) {
+            return false;
+        }
+
+        path.add(node);
+
+        if(node.value == number) {
+            return true;
+        }
+
+        if(findPath(node.left, number, path)) {
+            return true;
+        }
+
+        if(findPath(node.right, number, path)) {
+            return true;
+        }
+
+        path.remove(node);
+        return false;
+
     }
 
 }
