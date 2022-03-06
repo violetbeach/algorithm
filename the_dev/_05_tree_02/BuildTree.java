@@ -31,7 +31,36 @@ public class BuildTree {
      *  전위탐색(DLR): 1, 2, 4, 5, 3
      */
     private Node build(int[] inOrder, int[] preOrder) {
-        return null;
+        return buildRecurse(inOrder, preOrder, 0, inOrder.length - 1);
+    }
+
+    int preIndex = 0;
+    private Node buildRecurse(int[] inOrder, int[] preOrder, int startIndex, int endIndex) {
+        if(startIndex > endIndex) {
+            return null;
+        }
+
+        Node node = new Node(preOrder[preIndex++]);
+
+        if(startIndex == endIndex) {
+            return node;
+        }
+
+        int inIndex = searchIndex(inOrder, node.value);
+        node.left = buildRecurse(inOrder, preOrder, startIndex, inIndex - 1);
+        node.right = buildRecurse(inOrder, preOrder, inIndex + 1, endIndex);
+
+        return node;
+    }
+
+    private int searchIndex(int[] inOrder, int value) {
+        for (int i = 0; i < inOrder.length; i++) {
+            if(inOrder[i] == value) {
+                return i;
+            }
+
+        }
+        return 0;
     }
 
 }
