@@ -41,44 +41,24 @@ public class FindLCA {
     /**
      * TODO 주어진 이진 트리 (node) 에서 두 노드 n1, n2의 가장 가까운 공통 조상(Lowest Common Ancestor)을 찾는 코드를 작성하라.
      */
-    private Node solution(Node root, int n1, int n2) {
-        List<Node> n1path = new ArrayList<>();
-        List<Node> n2path = new ArrayList<>();
-        if(!findPath(root, n1, n1path) || !findPath(root, n2, n2path)) {
+    // 주어진 이진트리에 두 값이 항상 있다고 가정하면, 트리를 한 번만 순회할 수 있음
+    private Node solution(Node node, int n1, int n2) {
+        if(node == null) {
             return null;
         }
 
-        int index = 0;
-        for(; index < n1path.size() && index < n2path.size(); index++) {
-            if(!n1path.get(index).equals(n2path.get(index))) {
-                break;
-            }
+        if(node.value == n1 || node.value == n2) {
+            return node;
         }
 
-        return n1path.get(index - 1);
-    }
+        Node leftLCA = solution(node.left, n1, n2);
+        Node rightLCA = solution(node.right, n1, n2);
 
-    private boolean findPath(Node node, int number, List<Node> path) {
-        if(node == null) {
-            return false;
+        if(leftLCA != null && rightLCA != null) {
+            return node;
         }
 
-        path.add(node);
-
-        if(node.value == number) {
-            return true;
-        }
-
-        if(findPath(node.left, number, path)) {
-            return true;
-        }
-
-        if(findPath(node.right, number, path)) {
-            return true;
-        }
-
-        path.remove(node);
-        return false;
+        return (leftLCA != null) ? leftLCA : rightLCA;
 
     }
 
