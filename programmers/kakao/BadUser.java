@@ -11,6 +11,7 @@ import java.util.stream.IntStream;
 // dfs를 할 떄 호출 후 remove하면 자료구조를 재활용할 수 있다.
 
 // 비트마스크를 활용하신 분도 있었는데 Set<Set> 구조를 피하고 Set<Integer>로 해서 Integer에 비트로 조합을 넣었다.
+// 비트로도 Set처럼 중복 검사를 할 수 있다.
 
 
 public class BadUser {
