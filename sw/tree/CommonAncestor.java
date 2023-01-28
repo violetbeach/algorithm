@@ -86,10 +86,27 @@ class CommonAncestor
             for(int i=0; i<lineCount; i++) {
                 int parent = sc.nextInt();
                 int son = sc.nextInt();
+
                 parents[son] = parent;
-                depths[son] = depths[parent] + 1;
                 sons[parent].add(son);
             }
+
+            Queue<Integer> q = new LinkedList<>();
+            q.offer(1);
+
+            int depth = 0;
+            while(!q.isEmpty()) {
+                int num = q.poll();
+
+                depths[num] = depth;
+
+                for(int n : sons[num]) {
+                    q.offer(n);
+                }
+
+                depth++;
+            }
+
 
             int cnt = A;
             Set<Integer> aParents = new HashSet<>();
@@ -118,15 +135,15 @@ class CommonAncestor
                 }
             }
 
-            Queue<Integer> q = new LinkedList<>();
-            q.add(maxNum);
+            Queue<Integer> queue2 = new LinkedList<>();
+            queue2.add(maxNum);
             int count = 0;
-            while(!q.isEmpty()) {
-                int num = q.poll();
+            while(!queue2.isEmpty()) {
+                int num = queue2.poll();
                 count++;
 
                 for(int n : sons[num]) {
-                    q.offer(n);
+                    queue2.offer(n);
                 }
             }
             System.out.printf("#%d %d %d\n", test_case, maxNum, count);
