@@ -29,12 +29,11 @@ package graph;
 /////////////////////////////////////////////////////////////////////////////////////////////
 
 // 참고: https://github.com/beberiche/Algorithms/blob/4f45695f1575983c2ac142ff9d360f532fbc5c13/SWEA/src/Q1855_%EC%98%81%EC%A4%80%EC%9D%B4%EC%9D%98_%EC%A7%84%EC%A7%9C_BFS_UNSOLVED/Solution.java
+
 import java.util.*;
-import java.io.FileInputStream;
 
 /*
-   사용하는 클래스명이 Solution 이어야 하므로, 가급적 Solution.java 를 사용할 것을 권장합니다.
-   이러한 상황에서도 동일하게 java Solution 명령으로 프로그램을 수행해볼 수 있습니다.
+   풀긴 풀었지만, 디버깅을 해가면서 겨우 풀수있었다.
  */
 class RealBFS
 {
@@ -89,24 +88,52 @@ class RealBFS
             while(!q.isEmpty()) {
                 Node node = q.poll();
 
-                answer += node.depth - prev.depth;
+                Node lca = LCA(node, prev);
+                answer += Math.abs(prev.depth - lca.depth);
+                answer += Math.abs(node.depth - lca.depth);
 
                 if(!node.child.isEmpty()) {
                     for(int i = 0; i < node.child.size(); i++) {
-                        q.offer(node.child.get(i));
+                        if(!node.child.get(i).child.isEmpty()) {
+                            q.offer(node.child.get(i));
+                        }
+                        prev = node.child.get(i);
                     }
-                    answer += (node.child.size() * 2);
+                    answer += (node.child.size() * 2) - 1;
                 }
-
-                prev = node;
 
             }
 
-            answer -= 2;
             // 특정 노드에서 모든 자식에게 갔다 왔다, 바로 끝나면 1 빼기
 
             System.out.printf("#%d %d\n", test_case, answer);
         }
+    }
+
+    static Node LCA(Node a, Node b) {
+        Node maxNode;
+        Node minNode;
+        if(a.depth >= b.depth) {
+            maxNode = a;
+            minNode = b;
+        } else {
+            maxNode = b;
+            minNode = a;
+        }
+
+        while(minNode.parent != null) {
+            while(maxNode.depth != minNode.depth) {
+                maxNode = maxNode.parent;
+            }
+
+            if(minNode == maxNode) {
+                return maxNode;
+            }
+
+            minNode = minNode.parent;
+        }
+
+        return minNode;
     }
 
     static class Node {
