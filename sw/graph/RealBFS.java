@@ -111,29 +111,15 @@ class RealBFS
     }
 
     static Node LCA(Node a, Node b) {
-        Node maxNode;
-        Node minNode;
-        if(a.depth >= b.depth) {
-            maxNode = a;
-            minNode = b;
-        } else {
-            maxNode = b;
-            minNode = a;
+        while(a != b) {
+            if(a.depth > b.depth) {
+                a = a.parent;
+            } else {
+                b = b.parent;
+            }
         }
 
-        while(minNode.parent != null) {
-            while(maxNode.depth != minNode.depth) {
-                maxNode = maxNode.parent;
-            }
-
-            if(minNode == maxNode) {
-                return maxNode;
-            }
-
-            minNode = minNode.parent;
-        }
-
-        return minNode;
+        return a;
     }
 
     static class Node {
