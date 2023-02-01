@@ -34,6 +34,8 @@ import java.util.*;
 
 /*
    풀긴 풀었지만, 디버깅을 해가면서 겨우 풀수있었다.
+
+   클래스를 사용하면 TimeOut이 나는 문제인 것 같다.
  */
 class RealBFS
 {
