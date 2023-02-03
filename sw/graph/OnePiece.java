@@ -39,7 +39,7 @@ class OnePiece
 
     static double answer;
     static Island[] islands;
-    static boolean[][] visited;
+    static int[] parents;
 
     public static void main(String args[]) throws Exception
     {
@@ -66,7 +66,12 @@ class OnePiece
         {
             int N = sc.nextInt();
 
-            visited = new boolean[N][N];
+            parents = new int[N];
+            for(int i = 0; i < N;i ++) {
+                parents[i] = i;
+            }
+
+            answer = 0;
 
             /////////////////////////////////////////////////////////////////////////////////////////////
 			/*
@@ -106,19 +111,9 @@ class OnePiece
             while(!q.isEmpty()) {
                 Distance distance = q.poll();
 
-                if(!visited[distance.idx1][distance.idx2]) {
-                    visited[distance.idx1][distance.idx2] = true;
-                    visited[distance.idx2][distance.idx1] = true;
-
-                    // 2번 케이스에 이게 4번 실행됨 -> 3번이어야 함
-                    answer += se * Math.pow(distance.distance, 2);
-
-                    for(int i = 0; i < N;i ++) {
-                        // visited가 3단 이상도 처리해야함
-                        visited[distance.idx1][i] = visited[distance.idx1][i] ? visited[distance.idx1][i] : visited[distance.idx2][i];
-                        visited[distance.idx2][i] = visited[distance.idx2][i] ? visited[distance.idx2][i] : visited[distance.idx1][i];
-                    }
-
+                if(find(parents, distance.idx1) != find(parents, distance.idx2)) {
+                    answer += se * distance.distance;
+                    union(parents, distance.idx1, distance.idx2);
                 }
             }
 
@@ -127,6 +122,18 @@ class OnePiece
         }
     }
 
+    static int find(int[] parent, int x) {
+        if(parent[x] == x) return x;
+        return find(parent, parent[x]);
+    }
+
+    static void union(int[] parent, int x, int y) {
+        x = find(parent, x);
+        y = find(parent, y);
+
+        if(x < y) parent[y] = x;
+        else parent[x] = y;
+    }
     static class Distance {
         int idx1;
         int idx2;
@@ -135,7 +142,10 @@ class OnePiece
         public Distance(int idx1, int idx2) {
             this.idx1 = idx1;
             this.idx2 = idx2;
-            this.distance = Math.abs(islands[idx1].x - islands[idx2].x) + Math.abs(islands[idx1].y - islands[idx2].y);
+            long temp =
+                    (long) Math.abs(islands[idx1].x - islands[idx2].x) * Math.abs(islands[idx1].x - islands[idx2].x)
+                    + (long) Math.abs(islands[idx1].y - islands[idx2].y) * Math.abs(islands[idx1].y - islands[idx2].y);
+            this.distance = temp;
         }
     }
 
