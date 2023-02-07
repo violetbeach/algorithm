@@ -4,6 +4,7 @@ public class UserSolution {
 
     int[] counts;
     Node[] nodes;
+    int answer;
     public void dfs_init(int N, int[][] path) {
         nodes = new Node[100];
         counts = new int[100];
@@ -22,21 +23,26 @@ public class UserSolution {
     }
 
     public int dfs(int N) {
-        return myDfs(N, N);
+        answer = -1;
+        myDfs(N, N);
+        return answer;
     }
 
-    public int myDfs(int N, int init) {
+    public void myDfs(int N, int init) {
         Node node = nodes[N];
 
         if(node.value > init) {
-            return node.value;
+            answer = node.value;
+            return;
         }
 
         for(int i = 0; i  < counts[N]; i++) {
             myDfs(node.children[i].value, init);
+            if(answer != -1) {
+                return;
+            }
         }
 
-        return -1;
     }
 
     static class Node {

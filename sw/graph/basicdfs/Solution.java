@@ -94,9 +94,6 @@ public class Solution {
                 K = Integer.parseInt(st.nextToken());
                 ans = Integer.parseInt(st.nextToken());
 
-                if(K == 8) {
-                    System.out.println(1);
-                }
                 ret = usersolution.dfs(K);
 
                 if(ret != ans) {
