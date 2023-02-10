@@ -1,4 +1,4 @@
-/////////////////////////////////////////////////////////////////////////////////////////////
+package heap;/////////////////////////////////////////////////////////////////////////////////////////////
 // 기본 제공코드는 임의 수정해도 관계 없습니다. 단, 입출력 포맷 주의
 // 아래 표준 입출력 예제 필요시 참고하세요.
 // 표준 입력 예제
@@ -25,6 +25,7 @@
 //System.out.println(var);		       				   // 문자열 1개 출력하는 예제
 //System.out.println(AB);		       				     // long 변수 1개 출력하는 예제
 /////////////////////////////////////////////////////////////////////////////////////////////
+import java.util.Collections;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Scanner;
@@ -59,29 +60,33 @@ class MiddleValue
 
         for(int test_case = 1; test_case <= T; test_case++)
         {
-            String s = sc.nextLine();
-            int N = Character.getNumericValue(s.charAt(0));
+            int N = sc.nextInt();
 
             int answer = 0;
 
-            Queue<Integer> MaxHeap = new PriorityQueue<>();
+            Queue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
             Queue<Integer> minHeap = new PriorityQueue<>();
 
-            int initValue = Character.getNumericValue(s.charAt(1));
+            int initValue = sc.nextInt();
 
             minHeap.offer(initValue);
 
             for(int i = 0 ; i < N; i++) {
 
-
                 for(int j = 0; j < 2; j++) {
                     int value = sc.nextInt();
-                    if(value <= minHeap.peek()) {
-                        minHeap.offer(value);
-                    } else {
-
-                    }
+                    minHeap.offer(value);
                 }
+
+                maxHeap.offer(minHeap.poll());
+
+                while(minHeap.peek() < maxHeap.peek()) {
+                    minHeap.offer(maxHeap.poll());
+                    maxHeap.offer(minHeap.poll());
+                }
+
+                answer += minHeap.peek();
+                answer %= 20171109;
 
 
             }
