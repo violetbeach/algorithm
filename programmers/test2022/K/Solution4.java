@@ -1,56 +1,57 @@
 package programmers.test2022.K;
 
 
-import java.util.Arrays;
-
 /*
-* 1월쯤 해설 나올듯..
-*
-* 트리 계산하는 문제
-*
-* 딱 1분만 더있었으면 좋았을텐데.. 마지막에 변경한 알고리즘이 맞았을 수도 ? ㅠ
-*
-* 나중에 해설보거나, 오픈채팅 보고 다시 풀어보자.
-*
-* 많이 배웠다.
-*
-* */
+ * 표현 가능한 이진트리
+ *
+ * 정말 어려웠다 ㅠ-ㅠ
+ *
+ * 배열로 트리를 구성할 수 있어야 했고, 트리의 서브트리(왼쪽, 오른쪽)을 구할 수 있어야 했다.
+ *
+ * 비교문 및 조건문을 꼼꼼하게 짜도록 노력하자. (과하지도, 부족하지도 않게 꼼꼼히.. 시간 많이 투자하자)
+ *
+ * 정말 오래걸렸고, 삽질도 많았지만 결과물은 좋다. 기억하자.
+ * *
+ * */
 
-public class Solution4 {
+class Solution4 {
+
+    static int[] answer;
 
     public int[] solution(long[] numbers) {
-        int[] answer = new int[numbers.length];
-        Arrays.fill(answer, 1);
+        answer = new int[numbers.length];
         for(int i = 0; i < numbers.length; i++) {
-            if(isBad(numbers[i])) {
-                answer[i] = 0;
-            }
-        }
+            long n = numbers[i];
+            StringBuilder sb = new StringBuilder(Long.toBinaryString(numbers[i]));
+            int sLen = sb.length();
 
+            // 완전 포화 트리를 위해 앞에 0 삽입
+            int j = 1;
+            while(j - 1 < sLen) j *= 2;
+            for(int k = 0; k < j - sLen - 1; k++) {
+                sb.insert(0, "0");
+            }
+
+            if(dfs(sb.toString())) answer[i] = 1;
+
+        }
         return answer;
     }
 
-    boolean isBad(long num) {
-        if(num % 2 == 0) return true;
-        if (isEqualsReverse(Long.toBinaryString(num))) return true;
+    boolean dfs(String n) {
+        int mid = n.length() / 2;
 
-        return false;
-    }
+        String left = n.substring(0, mid);
+        String right = n.substring(mid + 1, n.length());
 
-    private boolean isEqualsReverse(String binaryString) {
-        while(binaryString.length() % 2 == 1 && binaryString.length() > 3) {
-            char c = binaryString.charAt(binaryString.length() / 2);
-            String left = binaryString.substring(0, binaryString.length() / 2);
-            String right = binaryString.substring((binaryString.length() / 2) + 1);
-            if(c == '0' && left.equals(right)) return true;
+        if(n.length() == 1) return true;
+
+        if(n.charAt(mid) == '0' && (left.charAt(mid/2) == '1' || right.charAt(mid/2) == '1')) {
+            return false;
         }
-        return false;
-    }
 
-    public static void main(String[] args) {
-        Solution4 solution4 = new Solution4();
-        long[] array = {5, 95};
-        System.out.println(solution4.solution(array));
+        return dfs(left) && dfs(right);
+
     }
 
 }
