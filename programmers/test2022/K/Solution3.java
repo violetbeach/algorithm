@@ -1,67 +1,56 @@
 package programmers.test2022.K;
 
-public class Solution3 {
+/*
+* 표현 가능한 이진트리
+*
+* 정말 어려웠다 ㅠ-ㅠ
+*
+* 배열로 트리를 구성할 수 있어야 했고, 트리의 서브트리(왼쪽, 오른쪽)을 구할 수 있어야 했다.
+*
+* 비교문 및 조건문을 꼼꼼하게 짜도록 노력하자. (과하지도, 부족하지도 않게 꼼꼼히.. 시간 많이 투자하자)
+*
+* 정말 오래걸렸고, 삽질도 많았지만 결과물은 좋다. 기억하자.
+* *
+* */
 
-    static final double[] sales = new double[]{10, 20, 30, 40};
-    int[] answer = new int[2];
+class Solution3 {
 
-    public int[] solution(int[][] users, int[] emoticons) {
-        int[][] emoInfos = new int[emoticons.length][4];
-        for(int i = 0; i < 4; i ++) {
-            for(int j = 0; j < emoticons.length; j++) {
-                emoInfos[j][i] = (int)(emoticons[j] * (100 - (double)sales[i]) / 100);
+    static int[] answer;
+
+    public int[] solution(long[] numbers) {
+        answer = new int[numbers.length];
+        for(int i = 0; i < numbers.length; i++) {
+            long n = numbers[i];
+            StringBuilder sb = new StringBuilder(Long.toBinaryString(numbers[i]));
+            int sLen = sb.length();
+
+            // 완전 포화 트리를 위해 앞에 0 삽입
+            int j = 1;
+            while(j - 1 < sLen) j *= 2;
+            for(int k = 0; k < j - sLen - 1; k++) {
+                sb.insert(0, "0");
             }
+
+            if(dfs(sb.toString())) answer[i] = 1;
+
         }
-
-        dfs(users, emoInfos, 0, new int[users.length]);
-
         return answer;
     }
 
-    void dfs(int[][] users, int[][] emoInfos, int index, int[] result) {
+    boolean dfs(String n) {
+        int mid = n.length() / 2;
 
-        if(index == emoInfos.length) {
-            int count = 0;
-            int sum = 0;
-            for(int i = 0; i < result.length; i++) {
-                if(result[i] >= users[i][1]) {
-                    count++;
-                } else {
-                    sum += result[i];
-                }
-            }
+        String left = n.substring(0, mid);
+        String right = n.substring(mid + 1, n.length());
 
-            if(answer[0] < count) {
-                answer[0] = count;
-                answer[1] = sum;
-            } else if(answer[0] == count) {
-                answer[1] = Math.max(sum, answer[1]);
-            }
+        if(n.length() == 1) return true;
 
-            return;
-
+        if(n.charAt(mid) == '0' && (left.charAt(mid/2) == '1' || right.charAt(mid/2) == '1')) {
+            return false;
         }
 
-        for(int j = 0; j < 4; j++) {
-            int[] newResult = result.clone();
+        return dfs(left) && dfs(right);
 
-            for(int k = 0; k < users.length; k++) {
-                if(users[k][0] <= sales[j]) {
-                    newResult[k] += emoInfos[index][j];
-                }
-            }
-            dfs(users, emoInfos, index + 1, newResult);
-
-        }
-
-    }
-
-    public static void main(String[] args) {
-        Solution3 solution3 = new Solution3();
-        int[][] users = {{40, 2900}, {23, 10000}, {11, 5200}, {5, 5900}, {40, 3100}, {27, 9200}, {32, 6900}};
-        int[] emoticons = {1300, 1500, 1600, 4900};
-        int[] result = solution3.solution(users, emoticons);
-        System.out.println(result);
     }
 
 }
